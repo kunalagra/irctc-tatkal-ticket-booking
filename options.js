@@ -321,7 +321,14 @@ async function updateButtonText() {
 function displayPassengers() {
   var passengerListTable = document.getElementById('passengerList');
   passengerListTable.innerHTML = ''; // Clear previous content
-
+  const foodOptions = {
+    D: "No Food",
+    V: "Veg",
+    N: "Non Veg",
+    J: "Jain Meal",
+    F: "Veg (Diabetic)",
+    G: "Non Veg (Diabetic)"
+  };
   chrome.storage.local.get('passengerList', function (data) {
     if (data.passengerList && data.passengerList.length > 0) {
       data.passengerList.forEach(function (passenger, index) {
@@ -332,7 +339,8 @@ function displayPassengers() {
         var cellAge = row.insertCell(2);
         var cellGender = row.insertCell(3);
         var cellPreference = row.insertCell(4);
-        var cellAction = row.insertCell(5);
+        var cellFood = row.insertCell(5);
+        var cellAction = row.insertCell(6);
 
         cellSelect.innerHTML = `<input type="checkbox" class="passengerCheckbox" ${
           passenger.isSelected ? 'checked' : ''
@@ -341,6 +349,7 @@ function displayPassengers() {
         cellAge.textContent = passenger.age;
         cellGender.textContent = passenger.gender;
         cellPreference.textContent = passenger.preference;
+        cellFood.textContent = foodOptions[passenger.food];
         cellAction.innerHTML = `<button class="deleteBtn btn btn-danger">Delete</button>`;
       });
     } else {
@@ -412,6 +421,7 @@ function addFormEventListener() {
     var age = parseInt(document.getElementById('age').value);
     var gender = document.getElementById('gender').value;
     var preference = document.getElementById('preference').value;
+    var food = document.getElementById('food').value;
 
     if (name && !isNaN(age) && gender) {
       var passenger = {
@@ -420,6 +430,7 @@ function addFormEventListener() {
         age: age,
         gender: gender,
         preference: preference,
+        food: food
       };
 
       chrome.storage.local.get('passengerList', function (data) {

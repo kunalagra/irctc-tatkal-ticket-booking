@@ -161,6 +161,7 @@ const PASSENGER_NAME_LIST = '.ui-autocomplete-items li';
 const PASSENGER_AGE_INPUT = 'input[formcontrolname="passengerAge"]';
 const PASSENGER_GENDER_INPUT = 'select[formcontrolname="passengerGender"]';
 const PASSENGER_BERTH_CHOICE = 'select[formcontrolname="passengerBerthChoice"]';
+const PASSENGER_FOOD_CHOICE = 'select[formcontrolname="passengerFoodChoice"]';
 const PASSENGER_MOBILE_NUMBER = 'mobileNumber';
 const PASSENGER_PREFERENCE_AUTOUPGRADATION = 'autoUpgradation';
 const PASSENGER_PREFERENCE_CONFIRMBERTHS = 'confirmberths';
@@ -739,6 +740,8 @@ function fillCustomPassengerDetails(passenger, row = null) {
   var ageInput = row.querySelector(PASSENGER_AGE_INPUT);
   var genderSelect = row.querySelector(PASSENGER_GENDER_INPUT);
   var preferenceSelect = row.querySelector(PASSENGER_BERTH_CHOICE);
+  var foodSelect = row.querySelector(PASSENGER_FOOD_CHOICE);
+
   
   nameInput.value = passenger.name;
   nameInput.dispatchEvent(new Event('input'));
@@ -755,6 +758,12 @@ function fillCustomPassengerDetails(passenger, row = null) {
   preferenceSelect.value = passenger.preference;
   preferenceSelect.dispatchEvent(new Event('change'));
   delay(100);
+
+  if(foodSelect){
+    foodSelect.value = passenger.food;
+    foodSelect.dispatchEvent(new Event('change'));
+    delay(100);
+  }
 }
 async function addCustomPassengerList() {
   // If there's only one passenger in the list and the row is already available, fill it directly

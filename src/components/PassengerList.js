@@ -27,6 +27,15 @@ const preferenceOptions = [
   { value: 'SU', label: 'Side Upper' },
 ];
 
+const foodOptions = [
+  { value: 'D', label: 'No Food' },
+  { value: 'V', label: 'Veg' },
+  { value: 'N', label: 'Non Veg' },
+  { value: 'J', label: 'Jain Meal' },
+  { value: 'F', label: 'Veg (Diabetic)' },
+  { value: 'G', label: 'Non Veg (Diabetic)' },
+];
+
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
 
@@ -163,6 +172,14 @@ const PassengerList = () => {
       editable: true,
       type: 'singleSelect',
       valueOptions: preferenceOptions,
+    },
+    {
+      field: 'preference',
+      headerName: 'Preference',
+      width: 180,
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: foodOptions,
     },
     {
       field: 'actions',
